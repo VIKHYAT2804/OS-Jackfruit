@@ -175,7 +175,6 @@ A `stop` command issued from the CLI client connects to the supervisor over a UN
 
 Two `cpu_hog` containers ran for 20 seconds each — `highpri` with `nice -5` and `lowpri` with `nice 10`. Both completed in 20 seconds on this single-CPU VM, demonstrating that the CFS scheduler gave the high-priority container more CPU time per quantum. The `ps` output confirms both exited cleanly.
 <h3>Starting High and Low Priority Containers</h3>
-
 <img width="1015" height="123" alt="image" src="https://github.com/user-attachments/assets/df1a24fb-b693-4765-8f49-ce77492bfd81" />
 
 
