@@ -136,7 +136,7 @@ Output of `engine ps` showing all tracked containers with their host PID, state,
 
 Contents of `logs/alpha.log` captured through the logging pipeline. Container stdout and stderr flow through a pipe into a log reader thread, which pushes chunks into a bounded buffer. A dedicated logging thread pops from the buffer and writes to the log file.
 
-![Screenshot](https://github.com/user-attachments/assets/715a73ac-c681-4e42-b452-e771a7e1d803)
+![Screenshot](https://github-production-user-asset-6210df.s3.amazonaws.com/212378065/579027603-715a73ac-c681-4e42-b452-e771a7e1d803.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20260416%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260416T075811Z&X-Amz-Expires=300&X-Amz-Signature=14cc7d143a864b038616115b64f9432ecf73d4191045dcacd5030ffd45055378&X-Amz-SignedHeaders=host&response-content-type=image%2Fpng)
 
 ### Screenshot 4 — CLI and IPC
 
