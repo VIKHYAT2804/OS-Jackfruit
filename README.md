@@ -137,7 +137,7 @@ Output of `engine ps` showing all tracked containers with their host PID, state,
 Contents of `logs/alpha.log` captured through the logging pipeline. Container stdout and stderr flow through a pipe into a log reader thread, which pushes chunks into a bounded buffer. A dedicated logging thread pops from the buffer and writes to the log file.
 
 <h3>CPU Hog Container Logs</h3>
-<img width="1015" alt="image" src="https://github.com/user-attachments/assets/715a73ac-c681-4e42-b452-e771a7e1d803" />
+<img src="https://github.com/user-attachments/assets/715a73ac-c681-4e42-b452-e771a7e1d803" width="100%">
 
 
 ### Screenshot 4 — CLI and IPC
