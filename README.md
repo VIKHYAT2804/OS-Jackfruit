@@ -113,80 +113,58 @@ ps aux | grep engine   # should show nothing
 
 ### Screenshot 1 — Multi-container supervision
 
-Two containers (`alpha` and `beta`) started under a single supervisor process. The supervisor uses `clone()` with `CLONE_NEWPID | CLONE_NEWUTS | CLONE_NEWNS` to isolate each container in its own namespace.
+Two containers (`alpha` and `beta`) started under a single supervisor process.
 
-<h3>Output Screenshot</h3>
 <img src="https://github.com/user-attachments/assets/ee5241a8-c589-48dc-b1f4-032f2a0016f5" width="100%">
 
 
-
-```
-
 ### Screenshot 2 — Metadata tracking
 
-Output of `engine ps` showing all tracked containers with their host PID, state, and configured memory limits.
+Output of `engine ps` showing all tracked containers.
 
-```
-<h3>Container Status Output</h3>
-<img width="1015" height="190" alt="image" src="https://github.com/user-attachments/assets/75dc2b31-c91c-4508-aae8-dc57ee0aa6dd" />
+<img src="https://github.com/user-attachments/assets/75dc2b31-c91c-4508-aae8-dc57ee0aa6dd" width="100%">
 
-```
 
-### Screenshot 3 – Bounded-buffer logging
+### Screenshot 3 — Bounded-buffer logging
 
-Contents of `logs/alpha.log` captured through the logging pipeline.
+Contents of `logs/alpha.log`.
 
-![Screenshot](https://github.com/user-attachments/assets/715a73ac-c681-4e42-b452-e771a7e1d803)
+<img src="https://github.com/user-attachments/assets/715a73ac-c681-4e42-b452-e771a7e1d803" width="100%">
+
 
 ### Screenshot 4 — CLI and IPC
 
-A `stop` command issued from the CLI client connects to the supervisor over a UNIX domain socket, sends a `control_request_t` struct, and receives a `control_response_t` reply. The `ps` output after the stop shows `alpha` in the `stopped` state.
-<h3>Container Stopped Status</h3>
-<img width="1015" height="154" alt="image" src="https://github.com/user-attachments/assets/543f9ab4-00ac-44b9-9d74-873667f95b91" />
+Stop command communication with supervisor.
+
+<img src="https://github.com/user-attachments/assets/543f9ab4-00ac-44b9-9d74-873667f95b91" width="100%">
 
 
 ### Screenshot 5 — Soft-limit warning
 
-`dmesg` output showing the kernel monitor detecting RSS exceeding the soft limit and logging a warning:
+Kernel detects memory soft limit.
 
-```
-[container_monitor] SOFT LIMIT container=memtest pid=6637 rss=8986624 limit=5242880
-```
-<h3>Memory Test Container Start</h3>
-
-<img width="1015" height="105" alt="image" src="https://github.com/user-attachments/assets/33862cfa-3865-4ff2-84a6-97e36ad665a1" />
-
+<img src="https://github.com/user-attachments/assets/33862cfa-3865-4ff2-84a6-97e36ad665a1" width="100%">
 
 
 ### Screenshot 6 — Hard-limit enforcement
 
-`dmesg` output showing the kernel monitor sending `SIGKILL` to the container process after RSS exceeded the hard limit, and the supervisor metadata reflecting `killed` state:
+Kernel kills container on hard limit breach.
 
-```
-[container_monitor] HARD LIMIT container=memtest pid=6637 rss=17375232 limit=10485760
-[container_monitor] Unregister request container=memtest pid=6637
-```
-<h3>Kernel Logs (dmesg Output)</h3>
-
-<img width="1015" height="634" alt="image" src="https://github.com/user-attachments/assets/4520e66e-e04d-4a6d-8939-7dc79a85b5a5" />
+<img src="https://github.com/user-attachments/assets/4520e66e-e04d-4a6d-8939-7dc79a85b5a5" width="100%">
 
 
 ### Screenshot 7 — Scheduling experiment
 
-Two `cpu_hog` containers ran for 20 seconds each — `highpri` with `nice -5` and `lowpri` with `nice 10`. Both completed in 20 seconds on this single-CPU VM, demonstrating that the CFS scheduler gave the high-priority container more CPU time per quantum. The `ps` output confirms both exited cleanly.
-<h3>Starting High and Low Priority Containers</h3>
-<img width="1015" height="123" alt="image" src="https://github.com/user-attachments/assets/df1a24fb-b693-4765-8f49-ce77492bfd81" />
+High vs low priority containers.
+
+<img src="https://github.com/user-attachments/assets/df1a24fb-b693-4765-8f49-ce77492bfd81" width="100%">
 
 
 ### Screenshot 8 — Clean teardown
 
-After Ctrl+C on the supervisor and `rmmod monitor`, `ps aux | grep engine` shows no zombie or lingering engine processes. `dmesg` confirms `[container_monitor] Module unloaded` — all kernel list entries freed cleanly.
+No zombie processes after shutdown.
 
----<h3>CPU Execution and Container Status</h3>
-
-<img width="1015" height="634" alt="image" src="https://github.com/user-attachments/assets/c6c37d01-117a-4d3b-8ac7-b0fa9475b0be" />
-
-
+<img src="https://github.com/user-attachments/assets/c6c37d01-117a-4d3b-8ac7-b0fa9475b0be" width="100%">
 ## 4. Engineering Analysis
 
 ### 4.1 Isolation Mechanisms
