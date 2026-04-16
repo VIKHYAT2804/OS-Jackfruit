@@ -32,3 +32,6 @@ logs/
 *.swp
 *~
 .vscode/
+rootfs/
+boilerplate/OS-Jackfruit/
+rootfs/
