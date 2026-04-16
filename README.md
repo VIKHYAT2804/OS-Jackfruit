@@ -128,7 +128,8 @@ Output of `engine ps` showing all tracked containers with their host PID, state,
 
 ```
 <h3>Container Status Output</h3>
-<img src="screenshots/cn1.png" width="100%">
+<img width="1015" height="190" alt="image" src="https://github.com/user-attachments/assets/75dc2b31-c91c-4508-aae8-dc57ee0aa6dd" />
+
 ```
 
 ### Screenshot 3 — Bounded-buffer logging
