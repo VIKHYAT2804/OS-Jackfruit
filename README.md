@@ -127,18 +127,21 @@ Two containers (`alpha` and `beta`) started under a single supervisor process. T
 Output of `engine ps` showing all tracked containers with their host PID, state, and configured memory limits.
 
 ```
-ID               PID      STATE      SOFT(MB)     HARD(MB)
-alpha            6575     running    40           64
-beta             6582     running    40           64
+<h3>Container Status Output</h3>
+<img src="screenshots/cn1.png" width="100%">
 ```
 
 ### Screenshot 3 — Bounded-buffer logging
 
 Contents of `logs/alpha.log` captured through the logging pipeline. Container stdout and stderr flow through a pipe into a log reader thread, which pushes chunks into a bounded buffer. A dedicated logging thread pops from the buffer and writes to the log file.
+<h3>CPU Hog Container Logs</h3>
+<img src="screenshots/cpu_logs.png" width="100%">
 
 ### Screenshot 4 — CLI and IPC
 
 A `stop` command issued from the CLI client connects to the supervisor over a UNIX domain socket, sends a `control_request_t` struct, and receives a `control_response_t` reply. The `ps` output after the stop shows `alpha` in the `stopped` state.
+<h3>Container Stopped Status</h3>
+<img src="screenshots/container_stop.png" width="100%">
 
 ### Screenshot 5 — Soft-limit warning
 
@@ -147,6 +150,9 @@ A `stop` command issued from the CLI client connects to the supervisor over a UN
 ```
 [container_monitor] SOFT LIMIT container=memtest pid=6637 rss=8986624 limit=5242880
 ```
+<h3>Memory Test Container Start</h3>
+<img src="screenshots/memtest_start.png" width="100%">
+
 
 ### Screenshot 6 — Hard-limit enforcement
 
@@ -156,6 +162,8 @@ A `stop` command issued from the CLI client connects to the supervisor over a UN
 [container_monitor] HARD LIMIT container=memtest pid=6637 rss=17375232 limit=10485760
 [container_monitor] Unregister request container=memtest pid=6637
 ```
+<h3>Kernel Logs (dmesg Output)</h3>
+<img src="screenshots/dmesg_output.png" width="100%">
 
 ### Screenshot 7 — Scheduling experiment
 
