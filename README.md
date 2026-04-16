@@ -115,8 +115,10 @@ ps aux | grep engine   # should show nothing
 
 Two containers (`alpha` and `beta`) started under a single supervisor process. The supervisor uses `clone()` with `CLONE_NEWPID | CLONE_NEWUTS | CLONE_NEWNS` to isolate each container in its own namespace.
 
-```
-<img width="877" height="664" alt="VirtualBox_ubuntu os_15_04_2026_23_39_14" src="https://github.com/user-attachments/assets/ee5241a8-c589-48dc-b1f4-032f2a0016f5" />
+<h3>Output Screenshot</h3>
+<img src="https://github.com/user-attachments/assets/ee5241a8-c589-48dc-b1f4-032f2a0016f5" width="100%">
+
+
 
 ```
 
