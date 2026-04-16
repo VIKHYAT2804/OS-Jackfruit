@@ -136,13 +136,15 @@ Output of `engine ps` showing all tracked containers with their host PID, state,
 
 Contents of `logs/alpha.log` captured through the logging pipeline. Container stdout and stderr flow through a pipe into a log reader thread, which pushes chunks into a bounded buffer. A dedicated logging thread pops from the buffer and writes to the log file.
 <h3>CPU Hog Container Logs</h3>
-<img src="screenshots/cpu_logs.png" width="100%">
+<img width="1015" height="634" alt="image" src="https://github.com/user-attachments/assets/715a73ac-c681-4e42-b452-e771a7e1d803" />
+
 
 ### Screenshot 4 — CLI and IPC
 
 A `stop` command issued from the CLI client connects to the supervisor over a UNIX domain socket, sends a `control_request_t` struct, and receives a `control_response_t` reply. The `ps` output after the stop shows `alpha` in the `stopped` state.
 <h3>Container Stopped Status</h3>
-<img src="screenshots/container_stop.png" width="100%">
+<img width="1015" height="154" alt="image" src="https://github.com/user-attachments/assets/543f9ab4-00ac-44b9-9d74-873667f95b91" />
+
 
 ### Screenshot 5 — Soft-limit warning
 
@@ -152,7 +154,9 @@ A `stop` command issued from the CLI client connects to the supervisor over a UN
 [container_monitor] SOFT LIMIT container=memtest pid=6637 rss=8986624 limit=5242880
 ```
 <h3>Memory Test Container Start</h3>
-<img src="screenshots/memtest_start.png" width="100%">
+
+<img width="1015" height="105" alt="image" src="https://github.com/user-attachments/assets/33862cfa-3865-4ff2-84a6-97e36ad665a1" />
+
 
 
 ### Screenshot 6 — Hard-limit enforcement
@@ -164,17 +168,26 @@ A `stop` command issued from the CLI client connects to the supervisor over a UN
 [container_monitor] Unregister request container=memtest pid=6637
 ```
 <h3>Kernel Logs (dmesg Output)</h3>
-<img src="screenshots/dmesg_output.png" width="100%">
+
+<img width="1015" height="634" alt="image" src="https://github.com/user-attachments/assets/4520e66e-e04d-4a6d-8939-7dc79a85b5a5" />
+
 
 ### Screenshot 7 — Scheduling experiment
 
 Two `cpu_hog` containers ran for 20 seconds each — `highpri` with `nice -5` and `lowpri` with `nice 10`. Both completed in 20 seconds on this single-CPU VM, demonstrating that the CFS scheduler gave the high-priority container more CPU time per quantum. The `ps` output confirms both exited cleanly.
+<h3>Starting High and Low Priority Containers</h3>
+
+<img width="1015" height="123" alt="image" src="https://github.com/user-attachments/assets/df1a24fb-b693-4765-8f49-ce77492bfd81" />
+
 
 ### Screenshot 8 — Clean teardown
 
 After Ctrl+C on the supervisor and `rmmod monitor`, `ps aux | grep engine` shows no zombie or lingering engine processes. `dmesg` confirms `[container_monitor] Module unloaded` — all kernel list entries freed cleanly.
 
----
+---<h3>CPU Execution and Container Status</h3>
+
+<img width="1015" height="634" alt="image" src="https://github.com/user-attachments/assets/c6c37d01-117a-4d3b-8ac7-b0fa9475b0be" />
+
 
 ## 4. Engineering Analysis
 
